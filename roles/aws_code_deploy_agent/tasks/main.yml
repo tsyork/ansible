@@ -1,0 +1,37 @@
+---
+# tasks file for aws_code_deploy_agent
+- name: Ensure ruby is installed
+  become: yes
+  yum:
+    name: ruby
+    state: present
+
+- name: Collect AWS facts
+  ec2_facts:
+
+- block:
+      - name: Attempt running the code deploy agent
+        become: yes
+        service:
+          name: codedeploy-agent
+          state: running
+          enabled: yes
+
+  rescue:
+      - name: Download Code Deploy Agent
+        get_url:
+          url: https://aws-codedeploy-{{ ansible_ec2_placement_region }}.s3.amazonaws.com/latest/install
+          dest: ~/install
+          mode: 0755
+
+      - name: Agent installer
+        become: yes
+        command: ./install auto
+
+      - name: Enable the code deploy agent
+        become: yes
+        service:
+          name: codedeploy-agent
+          state: running
+          enabled: yes
+
