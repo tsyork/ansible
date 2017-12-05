@@ -20,7 +20,7 @@
   rescue:
       - name: Download Code Deploy Agent
         get_url:
-          url: https://aws-codedeploy-{{ ansible_ec2_placement_region }}.s3.amazonaws.com/latest/install
+          url: https://aws-codedeploy-us-east-2.s3.amazonaws.com/latest/install
           dest: ~/install
           mode: 0755
 
