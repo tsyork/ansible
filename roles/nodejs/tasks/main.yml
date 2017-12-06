@@ -5,7 +5,8 @@
   yum:
     name: "{{ item }}"
     enablerepo: epel
-    state: installed
+    update_cache: yes
+    state: latest
   with_items:
     - nodejs
     - npm
