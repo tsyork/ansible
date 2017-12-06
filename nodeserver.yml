@@ -2,5 +2,5 @@
 - hosts: "{{ target | default('localhost') }}"
   become: yes
   roles:
-    - nodejs
+##    - nodejs ##TODO move node download and install from CF template to ansible
     - codedeploy
