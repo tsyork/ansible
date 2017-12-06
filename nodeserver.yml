@@ -3,4 +3,3 @@
   become: yes
   roles:
     - nodejs
-    - aws_code_deploy_agent
